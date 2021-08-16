@@ -4,8 +4,6 @@ const table = require("./api/table");
 
 app.use(express.static("public"));
 
-const imgSrc = "https://ssl.gstatic.com/onebox/media/sports/logos";
-
 app.get("/table", table);
 
 const port = process.env.PORT || 3000;
