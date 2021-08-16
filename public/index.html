@@ -15,7 +15,7 @@
   <body class="m-2 font-body">
     <div
       x-data="eplTable()"
-      x-init="fetch('http://192.168.5.174:3000/table')
+      x-init="fetch('http://localhost:3000/table')
       .then(response => response.json())
       .then(data => teams = data)"
     >
