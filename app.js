@@ -1,10 +1,7 @@
-const cors = require("cors");
 const express = require("express");
 const app = express();
-const table = require("./api/index");
+const table = require("./api/table");
 
-app.use(cors());
-app.options("*", cors());
 app.use(express.static("public"));
 
 const imgSrc = "https://ssl.gstatic.com/onebox/media/sports/logos";
