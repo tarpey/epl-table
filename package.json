@@ -1,0 +1,22 @@
+{
+  "name": "epl-table-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js",
+    "tailwind": "tailwindcss build -i ./src/main.css -o ./public/main.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "tailwindcss": "^2.2.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}

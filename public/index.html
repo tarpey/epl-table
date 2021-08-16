@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Premier League Table 2021-22</title>
+    <link href="main.css" rel="stylesheet" />
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js"
+      defer
+    ></script>
+  </head>
+
+  <body class="m-2 font-body">
+    <div
+      x-data="eplTable()"
+      x-init="fetch('http://192.168.5.174:3000/table')
+      .then(response => response.json())
+      .then(data => teams = data)"
+    >
+      <div class="w-full">
+        <div
+          class="
+            grid grid-cols-6
+            sm:grid-cols-12
+            grid-gap-4
+            bg-gray-600
+            text-white
+            py-2
+            font-semibold
+          "
+        >
+          <div class="flex justify-center"></div>
+          <div class="col-span-3">Team</div>
+          <div class="flex justify-center">GP</div>
+          <div class="hidden sm:flex justify-center">W</div>
+          <div class="hidden sm:flex justify-center">L</div>
+          <div class="hidden sm:flex justify-center">D</div>
+          <div class="hidden sm:flex justify-center">GF</div>
+          <div class="hidden sm:flex justify-center">GA</div>
+          <div class="hidden sm:flex justify-center">GD</div>
+          <div class="flex justify-center">PTS</div>
+        </div>
+        <template x-for="(team, index) in teams" :key="team.name">
+          <div
+            class="
+              grid grid-cols-6
+              sm:grid-cols-12
+              grid-gap-4
+              py-2
+              hover:bg-gray-300
+              cursor-pointer
+            "
+            :class="{ 'bg-gray-100 border-gray-100 hover:border-gray-300': index % 2 === 1, 'bg-gray-200 border-gray-200 hover:border-gray-300':  index % 2 == 0, 'border-b-2 border-dashed border-gray-500 hover:border-gray-500':  index === 3 || index === 16}"
+          >
+            <div class="flex justify-center items-center">
+              <p x-text="index + 1"></p>
+            </div>
+            <div class="col-span-3">
+              <div class="flex items-center">
+                <div class="relative w-6 h-6 mr-2 md:block">
+                  <img
+                    class="object-cover w-full h-full"
+                    :src="team.logo"
+                    :alt="team.name"
+                    loading="lazy"
+                  />
+                </div>
+                <div>
+                  <p
+                    class="font-semibold hidden sm:block"
+                    x-text="team.name"
+                  ></p>
+                  <p
+                    class="font-semibold block sm:hidden"
+                    x-text="team.shortName"
+                  ></p>
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-center items-center">
+              <p x-text="team.w + team.l + team.d"></p>
+            </div>
+            <div class="hidden sm:flex justify-center items-center">
+              <p x-text="team.w"></p>
+            </div>
+            <div class="hidden sm:flex justify-center items-center">
+              <p x-text="team.d"></p>
+            </div>
+            <div class="hidden sm:flex justify-center items-center">
+              <p x-text="team.l"></p>
+            </div>
+            <div class="hidden sm:flex justify-center items-center">
+              <p x-text="team.gf"></p>
+            </div>
+            <div class="hidden sm:flex justify-center items-center">
+              <p x-text="team.ga"></p>
+            </div>
+            <div class="hidden sm:flex justify-center items-center">
+              <p x-text="team.gf - team.ga"></p>
+            </div>
+            <div class="flex justify-center items-center font-semibold">
+              <p x-text="team.w * 3 + team.d * 1"></p>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <script>
+      function eplTable() {
+        return {
+          teams: [],
+        };
+      }
+    </script>
+  </body>
+</html>
